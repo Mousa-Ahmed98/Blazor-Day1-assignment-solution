@@ -1,0 +1,51 @@
+﻿    @page "/product"
+
+    <PageTitle>Product</PageTitle>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <h3 class="text-center mb-4">Product Component</h3>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" @bind="SelectedProductId" placeholder="Enter product id"/>
+                    <button class="btn btn-primary" @onclick="ShowProduct">Show Product</button>
+                </div>
+
+            @if(SelectedProduct != null)
+            {
+                <div class="card mt-3 shadow">
+                    <div class="card-body">
+                        <h4 class="card-title text-center mb-4">Product Details</h4>
+                        <p class="card-text"><strong>Name : </strong>@SelectedProduct.Name</p>
+                        <p class="card-text"><strong>Price : </strong>EGP @SelectedProduct.Price</p>
+                        <p class="card-text"><strong>Category : </strong>@SelectedProduct.Category</p>
+                        <p class="card-text"><strong>DriveType : </strong>@SelectedProduct.DriveType</p>
+                    </div>
+                </div>
+            }
+        </div>
+        </div>
+    </div>
+
+
+    @code{
+    List<Product> products = new List<Product>()
+        {
+            new Product { Id = 1, Name = "Tesla Model S", Price = 79999, DriveType = "Electric", Category = "Sport" },
+            new Product { Id = 2, Name = "Toyota Camry", Price = 27999, DriveType = "Automatic", Category = "Family" },
+            new Product { Id = 3, Name = "Ford Mustang GT", Price = 38999, DriveType = "Manual", Category = "Sport" },
+            new Product { Id = 4, Name = "Honda Civic", Price = 21999, DriveType = "Automatic", Category = "Family" },
+            new Product { Id = 5, Name = "BMW X5", Price = 59999, DriveType = "Automatic", Category = "Family" },
+            new Product { Id = 6, Name = "Mercedes-Benz E-Class", Price = 54999, DriveType = "Automatic", Category = "Family" },
+            new Product { Id = 7, Name = "Chevrolet Silverado 1500", Price = 38999, DriveType = "Automatic", Category = "Family" },
+            new Product { Id = 8, Name = "Audi Q7", Price = 67999, DriveType = "Automatic", Category = "Family" },
+            new Product { Id = 9, Name = "Jeep Wrangler", Price = 33999, DriveType = "Manual", Category = "Sport" },
+            new Product { Id = 10, Name = "Subaru Outback", Price = 32999, DriveType = "Automatic", Category = "Family" }
+        };
+        public int? SelectedProductId {get; set;}
+
+        public Product SelectedProduct {get; set;}
+
+        void ShowProduct(){
+            SelectedProduct = products.FirstOrDefault(prod => prod.Id == SelectedProductId);
+        }
+    }
